@@ -19,7 +19,7 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      title: 'e/very days 2026',
+      title: 'Aex Designs',
       description: '3rd year of daily art practice by Afzal, learn more: aex.design/every-days',
       creatorAddress: '0x237047f8b97ab581974acaec36e6abba793a29b1',
       collectionAddress: '0x0f3f91d3dee2d6172a3c496b392ebeaa26318842',
@@ -35,7 +35,7 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      title: 'e/very days 2026',
+      title: 'Aex Designs',
       meta: [
         {
           name: 'theme-color',

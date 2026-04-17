@@ -6,7 +6,7 @@
 
     <div class="text">
       <div>
-        <span class="eyebrow">AEX Mint Contract</span>
+        <span class="eyebrow">Aex Designs</span>
         <h1>
           {{ collection.name || $t('collection.unnamed') }}
           <small v-if="collection.symbol">({{ collection.symbol }})</small>

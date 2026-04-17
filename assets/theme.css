@@ -2,12 +2,12 @@
 
 :root {
   --background: #000;
-  --background-light: #111;
+  --background-light: #000;
   --color: #fff;
-  --muted: #8f8f8f;
+  --muted: #a0a0a0;
   --primary: #fff;
   --border-color: #fff;
-  --border-color-light: #5a5a5a;
+  --border-color-light: #fff;
   --border-width: 1px;
   --border-radius: 0;
   --border: var(--border-width) solid var(--border-color);
@@ -15,19 +15,19 @@
   --font-family: 'Space Mono', ui-monospace, 'SFMono-Regular', monospace;
   --font-weight: 400;
   --font-base: 1rem;
-  --font-lg: 1.25rem;
-  --letter-spacing: 0;
-  --letter-spacing-md: 0;
+  --font-lg: 1.125rem;
+  --letter-spacing: -0.01em;
+  --letter-spacing-md: -0.01em;
   --line-height: 1.5;
-  --line-height-md: 1.1;
+  --line-height-md: 1.2;
 
   --ui-font-family: 'Space Mono', ui-monospace, 'SFMono-Regular', monospace;
-  --ui-font-size: 0.95rem;
-  --ui-font-weight: 700;
+  --ui-font-size: 0.875rem;
+  --ui-font-weight: 400;
   --ui-text-transform: none;
   --ui-letter-spacing: 0;
 
-  --button-border: var(--border);
+  --button-border: 2px solid var(--border-color);
   --button-border-radius: 0;
   --button-background: transparent;
   --button-background-highlight: #fff;
@@ -39,23 +39,30 @@
   --card-background-highlight: transparent;
   --card-border-color-highlight: #fff;
 
-  --content-width: 56.25rem;
-  --content-width-lg: 56.25rem;
+  --content-width: 64rem;
+  --content-width-lg: 64rem;
   --navbar-height: 4.5rem;
 }
 
 html,
 body {
   background: #000;
+  color: #fff;
 }
 
 body {
   min-height: 100dvh;
+  -webkit-font-smoothing: antialiased;
 }
 
 a {
   color: inherit;
   text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+a:hover {
+  opacity: 0.7;
 }
 
 h1,
@@ -69,7 +76,8 @@ h4,
 article.collection-overview-card h1 {
   font-family: 'Space Grotesk', 'Space Mono', sans-serif;
   font-weight: 700;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
 }
 
 .app-header {
@@ -77,17 +85,11 @@ article.collection-overview-card h1 {
   top: 0;
   z-index: 50;
   background: #000;
-  border-bottom: 1px solid #fff;
+  border-bottom: 2px solid #fff;
 }
 
 .app-header :deep(.breadcrumb) {
-  gap: 0.35rem;
-}
-
-.app-header :deep(.breadcrumb a),
-.app-header :deep(.breadcrumb span) {
-  overflow: hidden;
-  text-overflow: ellipsis;
+  gap: 0.5rem;
 }
 
 .app-header :deep(.gas),
@@ -95,195 +97,101 @@ article.collection-overview-card h1 {
   color: #fff;
 }
 
-.frame {
-  margin: 0 auto;
-}
-
-.frame.inset {
-  gap: 0;
-  padding: 0;
-}
-
 .frame.inset > *:not(.borderless) {
   border: 0;
-  border-top: 1px solid #fff;
+  border-top: 2px solid #fff;
   border-radius: 0;
-  padding: 1rem;
+  padding: 1.5rem 1rem;
   box-shadow: none;
   background: transparent;
-}
-
-.profile-header,
-.collection-intro,
-.token-overview-card,
-article.collection-overview-card {
-  background: transparent;
-  border-radius: 0;
-  box-shadow: none;
-}
-
-.profile-header {
-  padding: 1rem;
 }
 
 .profile-header img {
-  width: min(7rem, 35vw);
-  height: min(7rem, 35vw);
+  width: min(10rem, 40vw);
+  height: min(10rem, 40vw);
   object-fit: cover;
-  border: 1px solid #fff;
+  border: 2px solid #fff;
 }
 
 .profile-header h1 {
+  margin: 0;
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  line-height: 0.9;
+}
+
+.collection-intro figure {
+  padding: 0;
+  border: 2px solid #fff;
+  background: #000;
+}
+
+.collection-intro .text h1 {
   margin: 0;
   font-size: clamp(2rem, 6vw, 4rem);
   line-height: 0.95;
 }
 
-.profile-header p {
-  max-width: 60ch;
-}
-
-.collection-intro {
-  padding: 1rem;
-}
-
-.collection-intro figure {
-  padding: 0;
-  border: 1px solid #fff;
-  background: #000;
-}
-
-.collection-intro img {
-  border-radius: 0;
-}
-
-.collection-intro .text h1 {
-  margin: 0;
-  font-size: clamp(1.75rem, 5vw, 3rem);
-  line-height: 0.98;
-  max-width: 14ch;
-}
-
-.collection-intro .text p,
-.collection-intro .text .meta {
-  max-width: 60ch;
-}
-
 .collection-intro .text .eyebrow {
-  display: inline-block;
-  font-family: 'Space Mono', ui-monospace, monospace;
-  font-size: 0.95rem;
-  line-height: 1;
-  color: #fff;
-}
-
-.collection-intro .text .meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  align-items: center;
-}
-
-.collection-intro .text .meta span,
-.collection-intro .text .meta a {
-  padding: 0;
-  border: 0;
-  background: transparent;
-  color: #fff;
-  font-size: 0.95rem;
-  letter-spacing: 0;
-  text-transform: none;
-}
-
-.collection-intro .text .links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  margin: 0;
-  padding: 0;
-}
-
-.collection-intro .text .links .button {
-  width: fit-content;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  margin-bottom: 0.5rem;
 }
 
 article.collection-overview-card {
-  border-top: 1px solid #fff;
-  padding: 1rem 0;
-}
-
-article.collection-overview-card .text h1,
-.token-overview-card h1 {
-  margin: 0;
-  font-size: clamp(1.4rem, 4vw, 2rem);
-  line-height: 1;
-}
-
-article.collection-overview-card .text p,
-.token-overview-card .description,
-.token-overview-card .muted,
-.token-overview-card .closes-in {
-  color: #fff;
-  opacity: 0.78;
-}
-
-.token-overview-card {
-  min-height: 0;
-  padding: 1rem 0;
-}
-
-.token-overview-card .token-id {
-  color: #fff;
+  border-top: 2px solid #fff;
+  padding: 1.5rem 0;
 }
 
 .token-overview-card :is(.image, .embed),
 article.collection-overview-card .image {
-  overflow: hidden;
-  border: 1px solid #fff;
+  border: 2px solid #fff;
   border-radius: 0;
   background: #000;
 }
 
 .button,
-button,
-input,
-textarea,
-select {
-  border-radius: 0;
-  box-shadow: none;
-  background: transparent;
-}
-
-.button,
 button {
-  border-width: 2px;
+  border: 2px solid #fff;
+  border-radius: 0;
+  padding: 0.75rem 1.5rem;
+  font-family: var(--ui-font-family);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .button:hover,
-.button:focus-visible,
-button:hover,
-button:focus-visible {
-  color: #000;
+button:hover {
   background: #fff;
-  transform: none;
-  box-shadow: none;
+  color: #000;
 }
 
 .button.link {
-  border-width: 1px;
+  border-width: 0;
+  border-bottom: 2px solid transparent;
+  padding: 0.25rem 0;
 }
 
-.button.link:hover,
-.button.link:focus-visible {
-  color: #000;
-  background: #fff;
+.button.link:hover {
+  background: transparent;
+  color: #fff;
+  border-bottom-color: #fff;
 }
 
 input,
 textarea,
 select,
 .form-item {
+  border: 2px solid #fff;
   background: #000;
+  color: #fff;
+  border-radius: 0;
 }
 
 .collections-overview {
