@@ -14,7 +14,7 @@ export default defineNuxtConfig({
 
   css: [
     '@base/assets/styles/index.css',
-    join(currentDir, './assets/theme.css'),
+    '~/assets/theme.css',
   ],
 
   runtimeConfig: {
@@ -36,6 +36,9 @@ export default defineNuxtConfig({
   app: {
     head: {
       title: 'Aex Designs',
+      htmlAttrs: {
+        class: 'dark',
+      },
       meta: [
         {
           name: 'theme-color',
@@ -47,6 +50,10 @@ export default defineNuxtConfig({
           rel: 'icon',
           type: 'image/svg+xml',
           href: '/icon.svg',
+        },
+        {
+          rel: 'stylesheet',
+          href: 'https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Space+Mono:wght@400;700&display=swap',
         },
       ],
     },
