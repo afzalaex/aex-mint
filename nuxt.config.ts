@@ -26,6 +26,18 @@ export default defineNuxtConfig({
       defaultAvatar: '/icon.svg',
       platformUrl: 'https://aex.design/every-days',
       indexerEndpoints: 'https://indexer.networked.art',
+      links: [
+        {
+          label: 'Aex.Design',
+          url: 'https://aex.design',
+          icon: 'website'
+        },
+        {
+          label: 'x.com/afzalaex',
+          url: 'https://x.com/afzalaex',
+          icon: 'twitter'
+        }
+      ],
       walletConnectProjectId: process.env.NUXT_PUBLIC_WALLET_CONNECT_PROJECT_ID || 'bc436338b71debaeb1dfbb0dd5daddcf',
       mainnetRpc1: 'https://eth.llamarpc.com',
       rpc1: 'https://eth.llamarpc.com',
@@ -51,6 +63,10 @@ export default defineNuxtConfig({
           rel: 'icon',
           type: 'image/svg+xml',
           href: '/icon.svg',
+        },
+        {
+          rel: 'stylesheet',
+          href: 'https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap',
         },
       ],
     },
