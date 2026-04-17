@@ -26,7 +26,7 @@ export default defineNuxtConfig({
       defaultAvatar: '/icon.svg',
       platformUrl: 'https://aex.design/every-days',
       indexerEndpoints: 'https://indexer.networked.art',
-      walletConnectProjectId: process.env.NUXT_PUBLIC_WALLET_CONNECT_PROJECT_ID,
+      walletConnectProjectId: process.env.NUXT_PUBLIC_WALLET_CONNECT_PROJECT_ID || 'bc436338b71debaeb1dfbb0dd5daddcf',
       mainnetRpc1: 'https://eth.llamarpc.com',
       rpc1: 'https://eth.llamarpc.com',
       rpc2: 'https://ethereum-rpc.publicnode.com',

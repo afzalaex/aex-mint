@@ -61,13 +61,14 @@ button.link:hover,
 }
 
 /* Buttons: White Stroke, Transparent Background (except buttons that have .link class) */
-.button:not(.link),
-button:not(.link) {
+.aex-shell .button:not(.link),
+.aex-shell button:not(.link) {
   background: transparent !important;
   color: #fff !important;
   border: 2px solid #fff !important;
   border-radius: 0 !important;
-  padding: 1rem 2.5rem !important; /* Proper spacing inside buttons */
+  padding: 0.6rem 1.25rem !important; /* Smaller stock-like spacing inside buttons */
+  font-size: 0.85rem !important;
   text-transform: uppercase !important;
   font-family: var(--ui-font-family) !important;
   font-weight: 700 !important;
@@ -77,8 +78,8 @@ button:not(.link) {
   opacity: 1 !important;
 }
 
-.button:not(.link):hover,
-button:not(.link):hover {
+.aex-shell .button:not(.link):hover,
+.aex-shell button:not(.link):hover {
   background-color: #fff !important;
   color: #000 !important;
 }

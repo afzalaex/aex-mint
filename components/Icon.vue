@@ -20,7 +20,7 @@ const ICONS = {
   'close': '✕',
   'code': '{/}',
   'discord': 'Discord',
-  'edit': 'Edit',
+  'edit': '',
   'email': '@',
   'folder': '/',
   'github': 'GitHub',
