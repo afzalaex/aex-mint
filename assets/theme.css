@@ -13,104 +13,66 @@
   --font-weight: 400;
 
   /* UI ELEMENTS */
-  --ui-font-family: 'Space Grotesk', sans-serif;
+  --ui-font-family: 'Space Mono', monospace;
   --ui-font-size: 0.95rem;
-  --ui-font-weight: 700;
-  --ui-text-transform: uppercase;
-  --ui-letter-spacing: 0.05em;
+  --ui-font-weight: 400;
+  --ui-text-transform: none;
+  --ui-letter-spacing: 0;
 
   /* BORDERS */
-  --border-color: rgba(255, 255, 255, 0.15);
-  --border-width: 1px;
+  --border-color: #fff;
+  --border-width: 2px;
   --border-radius: 0;
-
-  /* COMPONENTS */
-  --button-background-highlight: #fff;
-  --button-border-color-highlight: #fff;
-  --card-background-highlight: transparent;
-  --card-border-color-highlight: rgba(255, 255, 255, 0.3);
-  --breadcrumb-background-highlight: #fff;
-  --breadcrumb-active-color: #000;
 }
 
-/* Force Dark Mode defaults */
+/* Force Dark Mode defaults for Black Background/White Text */
+html.dark,
 .dark body {
-  background-color: #000;
-  color: #fff;
+  background-color: #000 !important;
+  color: #fff !important;
 }
 
-/* Global Link Styling (non-buttons) */
-a:not(.button):not(button) {
-  text-decoration: underline !important;
-  text-underline-offset: 4px;
-  opacity: 0.7;
-  transition: opacity 0.2s ease;
+body {
+  font-family: var(--font-family) !important;
 }
 
-a:not(.button):not(button):hover {
-  opacity: 1 !important;
+/* Links: Standard underline, color grey */
+a {
+  color: #a0a0a0 !important;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.2s ease;
 }
 
-/* Brutalist Button: Stroke to Fill */
+a:hover {
+  color: #fff !important;
+}
+
+/* Buttons: 2px White Stroke, Transparent Background */
 .button,
-button {
+button,
+.app-header :deep(.button),
+.app-header :deep(button) {
   background: transparent !important;
   color: #fff !important;
-  border: 2px solid #fff !important; /* Buttons keep thick white border */
+  border: 2px solid #fff !important;
   border-radius: 0 !important;
-  padding: 1rem 2.5rem !important; /* Increased padding */
-  transition: all 0.2s ease !important;
+  padding: 0.75rem 1.5rem !important;
+  font-family: var(--ui-font-family) !important;
+  text-transform: none !important;
   text-decoration: none !important;
-  opacity: 1 !important;
+  transition: background-color 0.2s ease, color 0.2s ease !important;
 }
 
 .button:hover,
-button:hover {
-  background: #fff !important;
+button:hover,
+.app-header :deep(.button:hover),
+.app-header :deep(button:hover) {
+  background-color: #fff !important;
   color: #000 !important;
 }
 
-/* Navbar Overrides */
-.app-header {
-  border-bottom: 0 !important; /* Removed navbar border */
-}
-
-.app-header :deep(.breadcrumb a) {
-  font-family: var(--ui-font-family);
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  text-decoration: none !important; /* Navbar title shouldn't be underlined */
-  opacity: 1 !important;
-}
-
-/* Thin White Borders for cards/frames */
-.collection-intro figure,
-.token-overview-card :is(.image, .embed),
-article.collection-overview-card .image {
-  border: 1px solid rgba(255, 255, 255, 0.15) !important;
-  border-radius: 0 !important;
-}
-
-.frame.inset > *:not(.borderless) {
-  border: 0 !important;
-  border-top: 1px solid rgba(255, 255, 255, 0.15) !important;
-  padding: 2rem 1rem !important;
-  background: transparent !important;
-}
-
-/* Input elements */
-input,
-textarea,
-select,
-.form-item {
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-  border-radius: 0 !important;
-  background: #000 !important;
-  color: #fff !important;
-  padding: 0.75rem !important;
-}
-
-.muted,
-.secondary {
-  color: #a0a0a0 !important;
+/* Reset components that use icons/emojis if they feel cluttered */
+.icon {
+  font-style: normal;
 }

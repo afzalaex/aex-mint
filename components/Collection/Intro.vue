@@ -42,6 +42,8 @@
 </template>
 
 <script setup lang="ts">
+import type { Collection } from '@visualizevalue/mint-app-base/types'
+
 const { collection } = defineProps<{
   collection: Collection
 }>()
@@ -71,14 +73,15 @@ header.collection-intro {
     small {
       color: var(--muted);
       font-size: max(0.95rem, 0.28em);
-      font-family: var(--ui-font-family);
-      letter-spacing: var(--ui-letter-spacing);
-      text-transform: uppercase;
     }
   }
 
   menu {
     list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
   }
 }
 </style>
