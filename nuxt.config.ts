@@ -1,0 +1,62 @@
+import { fileURLToPath } from 'node:url'
+import { dirname, join } from 'node:path'
+
+const currentDir = dirname(fileURLToPath(import.meta.url))
+
+export default defineNuxtConfig({
+  extends: [
+    '@visualizevalue/mint-app-base',
+  ],
+
+  alias: {
+    '@base': '@visualizevalue/mint-app-base',
+  },
+
+  css: [
+    '@base/assets/styles/index.css',
+    join(currentDir, './assets/theme.css'),
+  ],
+
+  runtimeConfig: {
+    public: {
+      title: 'e/very days 2026',
+      description: '3rd year of daily art practice by Afzal, learn more: aex.design/every-days',
+      creatorAddress: '0x237047f8b97ab581974acaec36e6abba793a29b1',
+      collectionAddress: '0x0f3f91d3dee2d6172a3c496b392ebeaa26318842',
+      defaultAvatar: '/icon.svg',
+      platformUrl: 'https://aex.design/every-days',
+      indexerEndpoints: 'https://indexer.networked.art',
+      mainnetRpc1: 'https://eth.llamarpc.com',
+      rpc1: 'https://eth.llamarpc.com',
+      rpc2: 'https://ethereum-rpc.publicnode.com',
+      rpc3: 'https://eth.drpc.org',
+    },
+  },
+
+  app: {
+    head: {
+      title: 'e/very days 2026',
+      meta: [
+        {
+          name: 'theme-color',
+          content: '#f1eadf',
+        },
+      ],
+      link: [
+        {
+          rel: 'icon',
+          type: 'image/svg+xml',
+          href: '/icon.svg',
+        },
+      ],
+    },
+  },
+
+  nitro: {
+    preset: process.env.NITRO_PRESET || (process.env.VERCEL ? 'vercel' : 'node-server'),
+  },
+
+  devtools: {
+    enabled: true,
+  },
+})
