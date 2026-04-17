@@ -35,10 +35,10 @@ body {
   font-family: var(--font-family) !important;
 }
 
-/* Links: Standard underline, color grey */
-a, 
-button.link, 
-.button.link {
+/* ALL Links and Buttons styled identically as grey text-links */
+a,
+.aex-shell button,
+.aex-shell .button {
   color: #a0a0a0 !important;
   text-decoration: underline !important;
   text-underline-offset: 4px;
@@ -48,36 +48,19 @@ button.link,
   padding: 0 !important;
   transition: opacity 0.2s ease, color 0.2s ease !important;
   font-family: var(--font-family) !important;
-  opacity: 0.7;
+  opacity: 1;
 }
 
-a:hover, 
-button.link:hover, 
-.button.link:hover {
+a:hover,
+.aex-shell button:hover,
+.aex-shell .button:hover {
   color: #fff !important;
-  opacity: 1 !important;
-}
-
-/* Buttons: White Stroke, Transparent Background (except buttons that have .link class) */
-.aex-shell .button:not(.link),
-.aex-shell button:not(.link) {
   background: transparent !important;
-  color: #fff !important;
-  border: 2px solid #fff !important;
-  border-radius: 0 !important;
-  text-transform: uppercase !important;
-  font-family: var(--ui-font-family) !important;
-  font-weight: 700 !important;
-  text-decoration: none !important; /* Prevent underline inside explicit buttons */
-  cursor: pointer;
-  transition: background-color 0.2s ease, color 0.2s ease !important;
-  opacity: 1 !important;
 }
 
-.aex-shell .button:not(.link):hover,
-.aex-shell button:not(.link):hover {
-  background-color: #fff !important;
-  color: #000 !important;
+/* Shrink standard Mint Pricing popover */
+#about-gas {
+  font-size: 0.8rem !important;
 }
 
 /* Borders for elements other than buttons: thin and less opacity */

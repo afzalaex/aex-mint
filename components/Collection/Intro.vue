@@ -6,19 +6,18 @@
 
     <div class="text">
       <div>
-        <span class="eyebrow">Aex Designs</span>
-        <h1>
+        <h1 style="font-size: 2rem; margin-bottom: 0.5rem; line-height: 1.2;">
           {{ collection.name || $t('collection.unnamed') }}
-          <small v-if="collection.symbol">({{ collection.symbol }})</small>
+          <small v-if="collection.symbol" style="font-size: 1rem;">({{ collection.symbol }})</small>
         </h1>
         <p v-if="collection.description">
-          <ExpandableText :text="collection.description" />
+          <ExpandableText :text="collection.description" :length="80" />
         </p>
       </div>
 
       <div class="meta" v-if="id">
         <NuxtLink :to="{ name: 'id', params: { id } }">
-          by {{ store.displayName(id) }}
+          {{ store.displayName(id) }}
         </NuxtLink>
         <span class="meta-item">{{ collection.latestTokenId }} {{ $t('tokens', Number(collection.latestTokenId)) }}</span>
         <span class="meta-item">block {{ collection.initBlock }}</span>

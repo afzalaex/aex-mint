@@ -14,9 +14,9 @@ const props = defineProps({
 const ICONS = {
   'add': '+',
   'check': '✓',
-  'chevron-down': '↓',
-  'chevron-right': '→',
-  'chevron-up': '↑',
+  'chevron-down': '',
+  'chevron-right': '',
+  'chevron-up': '',
   'close': '✕',
   'code': '{/}',
   'discord': 'Discord',
