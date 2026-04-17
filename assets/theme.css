@@ -8,13 +8,10 @@
 
   /* FONTS */
   --font-family: 'Space Mono', monospace;
-  --font-base: 16px;
-  --font-lg: 1.25rem;
   --font-weight: 400;
 
   /* UI ELEMENTS */
   --ui-font-family: 'Space Mono', monospace;
-  --ui-font-size: 0.95rem;
   --ui-font-weight: 400;
   --ui-text-transform: none;
   --ui-letter-spacing: 0;
@@ -67,8 +64,6 @@ button.link:hover,
   color: #fff !important;
   border: 2px solid #fff !important;
   border-radius: 0 !important;
-  padding: 0.6rem 1.25rem !important; /* Smaller stock-like spacing inside buttons */
-  font-size: 0.85rem !important;
   text-transform: uppercase !important;
   font-family: var(--ui-font-family) !important;
   font-weight: 700 !important;
@@ -98,17 +93,6 @@ article.collection-overview-card .image {
   border-top: 1px solid rgba(255, 255, 255, 0.15) !important;
   padding: 2rem 1rem !important;
   background: transparent !important;
-}
-
-input,
-textarea,
-select,
-.form-item {
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-  border-radius: 0 !important;
-  background: #000 !important;
-  color: #fff !important;
-  padding: 0.75rem !important;
 }
 
 .icon {

@@ -1,9 +1,7 @@
 <template>
   <header class="app-header">
     <ClientOnly>
-      <div class="site-title">
-        <NuxtLink to="/">Aex Designs</NuxtLink>
-      </div>
+      <Breadcrumbs :items="breadcrumbs" />
 
       <div class="actions">
         <MintGasPricePopover class="header-action" />
@@ -26,7 +24,22 @@
 <script setup>
 import { useAccount } from '@wagmi/vue'
 const { isConnected, address } = useAccount()
+const appBreadcumbs = useAppBreadcrumb()
+const id = useArtistId()
 const store = useOnchainStore()
+
+const breadcrumbs = computed(() => {
+  return [
+    {
+      to: id.value === address.value?.toLowerCase()
+        ? { name: 'id', params: { id: id.value } }
+        : `/`,
+      text: 'Aex Designs'
+    },
+    ...appBreadcumbs.value,
+  ]
+})
+
 watchEffect(() => {
   if (! isConnected.value) {
     store.clearAllTokenBalances()
@@ -45,16 +58,26 @@ header {
   border-bottom: none !important;
 }
 
-.site-title a {
+:deep(.breadcrumbs) {
   font-family: 'Space Mono', monospace;
   font-weight: 700;
-  color: #fff;
-  text-decoration: none !important;
+  text-transform: uppercase;
   font-size: 1rem;
 }
 
-.site-title a:hover {
+:deep(.breadcrumbs > span > a) {
+  color: #fff;
+  text-decoration: none !important;
   opacity: 0.7;
+  transition: opacity 0.2s ease;
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+:deep(.breadcrumbs > span > a:hover),
+:deep(.breadcrumbs > span > a.router-link-active-exact) {
+  opacity: 1;
 }
 
 .actions {
@@ -75,6 +98,7 @@ header {
   font-size: 1rem !important;
   cursor: pointer;
   box-shadow: none !important;
+  text-transform: none !important;
 }
 
 :deep(.header-action:hover), :deep(.header-action button:hover), :deep(.header-action .button:hover) {
