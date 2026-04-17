@@ -2,7 +2,7 @@
 
 Custom Mint app for the `e/very days 2026` contract on Ethereum.
 
-The app is built as a Nuxt layer on top of `@visualizevalue/mint-app-base` and is configured for:
+The app is a Nuxt 3 application that extends `@visualizevalue/mint-app-base` and is configured for:
 
 - creator: `0x237047f8b97ab581974acaec36e6abba793a29b1`
 - collection: `0x0f3f91d3dee2d6172a3c496b392ebeaa26318842`
@@ -10,7 +10,7 @@ The app is built as a Nuxt layer on top of `@visualizevalue/mint-app-base` and i
 
 ## Stack
 
-- Nuxt 3 layer
+- Nuxt 3
 - `@visualizevalue/mint-app-base`
 - Mainnet Mint factory
 - Mint indexer: `https://indexer.networked.art`
@@ -20,13 +20,13 @@ The app is built as a Nuxt layer on top of `@visualizevalue/mint-app-base` and i
 Install dependencies:
 
 ```bash
-npm install
+pnpm install
 ```
 
 Start the app:
 
 ```bash
-npm run dev
+pnpm dev
 ```
 
 ## Build Commands
@@ -34,19 +34,19 @@ npm run dev
 Build for production:
 
 ```bash
-npm run build
+pnpm build
 ```
 
 Generate a static build:
 
 ```bash
-npm run generate
+pnpm generate
 ```
 
 Preview locally:
 
 ```bash
-npm run preview
+pnpm preview
 ```
 
 ## Optional Environment Variables
@@ -66,15 +66,15 @@ This project is set up to deploy cleanly as a separate Vercel project for `mint.
 Suggested flow:
 
 ```bash
-vercel link --project aex-mint --scope afzals-projects-5fdefa4e
-vercel --prod --scope afzals-projects-5fdefa4e
+vercel link --project <project-name>
+vercel --prod
 ```
 
 Then attach the custom domain in Vercel:
 
 ```bash
-vercel domains add mint.aex.design aex-mint --scope afzals-projects-5fdefa4e
-vercel domains inspect mint.aex.design --scope afzals-projects-5fdefa4e
+vercel domains add mint.aex.design <project-name>
+vercel domains inspect mint.aex.design
 ```
 
 If `aex.design` DNS is managed outside Vercel, add the CNAME target shown by the second command at your DNS provider.
