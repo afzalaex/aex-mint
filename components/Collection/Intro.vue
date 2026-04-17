@@ -20,8 +20,8 @@
         <NuxtLink :to="{ name: 'id', params: { id } }">
           by {{ store.displayName(id) }}
         </NuxtLink>
-        <span>{{ collection.latestTokenId }} {{ $t('tokens', Number(collection.latestTokenId)) }}</span>
-        <span>block {{ collection.initBlock }}</span>
+        <span class="meta-item">{{ collection.latestTokenId }} {{ $t('tokens', Number(collection.latestTokenId)) }}</span>
+        <span class="meta-item">block {{ collection.initBlock }}</span>
       </div>
 
       <menu class="links">
@@ -31,7 +31,7 @@
         <Button :to="mintUrl" target="_blank">
           <span>Original Mint Page</span>
         </Button>
-        <Button :to="explorerUrl" target="_blank" class="link">
+        <Button :to="explorerUrl" target="_blank">
           <span>View Contract</span>
         </Button>
       </menu>
@@ -74,6 +74,13 @@ header.collection-intro {
       color: var(--muted);
       font-size: max(0.95rem, 0.28em);
     }
+  }
+  
+  .meta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
   }
 
   menu {

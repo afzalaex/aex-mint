@@ -20,59 +20,96 @@
   --ui-letter-spacing: 0;
 
   /* BORDERS */
-  --border-color: #fff;
-  --border-width: 2px;
+  --border-color: rgba(255, 255, 255, 0.15); /* Thin less opacity border */
+  --border-width: 1px;
   --border-radius: 0;
+  
+  --button-border-color-highlight: #fff;
+  --card-border-color-highlight: rgba(255, 255, 255, 0.3);
 }
 
-/* Force Dark Mode defaults for Black Background/White Text */
+/* Force Dark Mode defaults */
 html.dark,
-.dark body {
+.dark body,
+body {
   background-color: #000 !important;
   color: #fff !important;
-}
-
-body {
   font-family: var(--font-family) !important;
 }
 
 /* Links: Standard underline, color grey */
-a {
+a, 
+button.link, 
+.button.link {
   color: #a0a0a0 !important;
-  text-decoration: underline;
-  text-underline-offset: 2px;
-  transition: color 0.2s ease;
+  text-decoration: underline !important;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  transition: opacity 0.2s ease, color 0.2s ease !important;
+  font-family: var(--font-family) !important;
+  opacity: 0.7;
 }
 
-a:hover {
+a:hover, 
+button.link:hover, 
+.button.link:hover {
   color: #fff !important;
+  opacity: 1 !important;
 }
 
-/* Buttons: 2px White Stroke, Transparent Background */
-.button,
-button,
-.app-header :deep(.button),
-.app-header :deep(button) {
+/* Buttons: White Stroke, Transparent Background (except buttons that have .link class) */
+.button:not(.link),
+button:not(.link) {
   background: transparent !important;
   color: #fff !important;
   border: 2px solid #fff !important;
   border-radius: 0 !important;
-  padding: 0.75rem 1.5rem !important;
+  padding: 1rem 2.5rem !important; /* Proper spacing inside buttons */
+  text-transform: uppercase !important;
   font-family: var(--ui-font-family) !important;
-  text-transform: none !important;
-  text-decoration: none !important;
+  font-weight: 700 !important;
+  text-decoration: none !important; /* Prevent underline inside explicit buttons */
+  cursor: pointer;
   transition: background-color 0.2s ease, color 0.2s ease !important;
+  opacity: 1 !important;
 }
 
-.button:hover,
-button:hover,
-.app-header :deep(.button:hover),
-.app-header :deep(button:hover) {
+.button:not(.link):hover,
+button:not(.link):hover {
   background-color: #fff !important;
   color: #000 !important;
 }
 
-/* Reset components that use icons/emojis if they feel cluttered */
+/* Borders for elements other than buttons: thin and less opacity */
+.collection-intro figure,
+.token-overview-card :is(.image, .embed),
+article.collection-overview-card .image {
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-radius: 0 !important;
+  background: #000 !important;
+}
+
+.frame.inset > *:not(.borderless) {
+  border: 0 !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.15) !important;
+  padding: 2rem 1rem !important;
+  background: transparent !important;
+}
+
+input,
+textarea,
+select,
+.form-item {
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 0 !important;
+  background: #000 !important;
+  color: #fff !important;
+  padding: 0.75rem !important;
+}
+
 .icon {
   font-style: normal;
 }
