@@ -11,7 +11,7 @@
     <p v-if="description">{{ description }}</p>
 
     <slot name="tags">
-      <Actions>
+      <Actions v-if="isArtist">
         <Button to="https://aex.design" target="_blank">
           <Icon type="website" />
           <span>Aex.Design</span>
@@ -39,6 +39,9 @@ const props = defineProps({
 })
 
 const store = useOnchainStore()
+
+const artistScope = useArtistScope()
+const isArtist = computed(() => props.address?.toLowerCase() === artistScope?.toLowerCase())
 
 const avatar = computed(() => props.avatar || config.public.defaultAvatar)
 const artist = computed(() => store.artist(props.address))

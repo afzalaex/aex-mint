@@ -50,6 +50,18 @@ body {
   color: var(--color) !important;
 }
 
+/* Make author wallet links inside token detail layout muted/grey */
+.artist a {
+  color: var(--muted) !important;
+  text-decoration: underline !important;
+  text-underline-offset: 4px;
+  transition: color 0.2s ease !important;
+}
+
+.artist a:hover {
+  color: var(--color) !important;
+}
+
 /* 100% Opacity stroke for Connect / Primary action buttons + Hover Fill */
 /* Excludes the dialog close button (.close class from DialogFrame) */
 .button:not(.link):not(.close) {
@@ -86,4 +98,29 @@ dialog .button.close:hover {
 
 #about-gas table td {
   white-space: nowrap;
+}
+
+/* Coming Soon message for non-artist profiles */
+.coming-soon-message {
+  padding: var(--spacer) var(--spacer);
+  color: var(--color);
+}
+
+.coming-soon-message p {
+  margin-bottom: var(--spacer-sm);
+}
+
+.coming-soon-message a {
+  color: var(--muted);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.coming-soon-message a:hover {
+  color: var(--color);
+}
+
+/* Make artifact number (#1) white on token detail page */
+.title h1 small {
+  color: var(--color) !important;
 }
