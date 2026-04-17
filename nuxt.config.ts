@@ -52,10 +52,6 @@ export default defineNuxtConfig({
           type: 'image/svg+xml',
           href: '/icon.svg',
         },
-        {
-          rel: 'stylesheet',
-          href: 'https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap',
-        },
       ],
     },
   },

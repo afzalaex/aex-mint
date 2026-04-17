@@ -3,33 +3,30 @@
     <ClientOnly>
       <Breadcrumbs :items="breadcrumbs" />
 
-      <div class="actions">
-        <MintGasPricePopover class="header-action" />
+      <MintGasPricePopover />
 
-        <Connect v-if="!isConnected" class="header-action" />
-        <NuxtLink v-else
-          :to="{
-            name: 'profile-address',
-            params: { address: address?.toLowerCase() }
-          }"
-          class="header-action account"
-        >
-          <Account :address="address" />
-        </NuxtLink>
-      </div>
+      <Connect v-if="! isConnected" />
+      <Button v-else
+        :to="{
+          name: 'profile-address',
+          params: { address: address?.toLowerCase() }
+        }"
+        class="account link"
+      >
+        <Account :address="address" />
+      </Button>
     </ClientOnly>
   </header>
 </template>
 
 <script setup>
 import { useAccount } from '@wagmi/vue'
+
 const { isConnected, address } = useAccount()
 const appBreadcumbs = useAppBreadcrumb()
 const id = useArtistId()
-const store = useOnchainStore()
-
 const breadcrumbs = computed(() => {
-  return [
+  const all = [
     {
       to: id.value === address.value?.toLowerCase()
         ? { name: 'id', params: { id: id.value } }
@@ -38,8 +35,11 @@ const breadcrumbs = computed(() => {
     },
     ...appBreadcumbs.value,
   ]
+
+  return all
 })
 
+const store = useOnchainStore()
 watchEffect(() => {
   if (! isConnected.value) {
     store.clearAllTokenBalances()
@@ -49,61 +49,50 @@ watchEffect(() => {
 
 <style scoped>
 header {
-  min-height: 71px;
+  height: var(--navbar-height);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1.5rem;
-  padding: 1rem 1.5rem;
-  border-bottom: none !important;
-}
+  gap: var(--spacer);
+  padding: var(--size-3) var(--size-6);
 
-:deep(.breadcrumbs) {
-  font-family: 'Space Mono', monospace;
-  font-weight: 700;
-  text-transform: uppercase;
-  font-size: 1rem;
-}
+  font-size: var(--app-header-font-size);
+  font-family: var(--app-header-font-family);
+  font-weight: var(--app-header-font-weight);
+  text-transform: var(--app-header-text-transform);
+  letter-spacing: var(--app-header-letter-spacing);
 
-:deep(.breadcrumbs > span > a) {
-  color: #fff;
-  text-decoration: none !important;
-  opacity: 0.7;
-  transition: opacity 0.2s ease;
-  background: transparent !important;
-  border: none !important;
-  padding: 0 !important;
-}
+  :deep(> .breadcrumb) {
+    text-overflow: ellipsis;
+    justify-content: flex-start;
+    white-space: nowrap;
 
-:deep(.breadcrumbs > span > a:hover),
-:deep(.breadcrumbs > span > a.router-link-active-exact) {
-  opacity: 1;
-}
+    > *:first-child:last-child {
+      a {
+        color: var(--color);
+      }
+    }
+  }
 
-.actions {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  margin-left: auto;
-}
+  :deep(> .gas) {
+    display: none;
+    margin-left: auto;
+    white-space: nowrap;
+    width: min-content;
 
-:deep(.header-action), :deep(.header-action button), :deep(.header-action .button) {
-  background: transparent !important;
-  border: none !important;
-  padding: 0 !important;
-  color: #a0a0a0 !important;
-  text-decoration: underline !important;
-  text-underline-offset: 4px;
-  font-family: 'Space Mono', monospace !important;
-  font-size: 1rem !important;
-  cursor: pointer;
-  box-shadow: none !important;
-  text-transform: none !important;
-}
+    @media (--md) {
+      display: block;
+    }
+  }
 
-:deep(.header-action:hover), :deep(.header-action button:hover), :deep(.header-action .button:hover) {
-  color: #fff !important;
-  opacity: 1 !important;
-  background: transparent !important;
+  :deep(> .button),
+  :deep(> button),
+  :deep(> a) {
+    font-size: inherit;
+    font-family: inherit;
+    font-weight: inherit;
+    text-transform: inherit;
+    letter-spacing: inherit;
+  }
 }
 </style>

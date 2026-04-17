@@ -1,84 +1,13 @@
 :root {
-  /* THEME COLORS */
   --background: #000;
   --color: #fff;
   --primary: #fff;
-  --muted: #a0a0a0;
-  --error: #ff4d4d;
-
-  /* FONTS */
-  --rem: 14px;
-  --font-family: 'Space Mono', monospace;
-  --font-weight: 400;
-
-  /* UI ELEMENTS */
-  --ui-font-family: 'Space Mono', monospace;
-  --ui-font-weight: 400;
-  --ui-text-transform: none;
-  --ui-letter-spacing: 0;
-
-  /* BORDERS */
-  --border-color: rgba(255, 255, 255, 0.15); /* Thin less opacity border */
-  --border-width: 1px;
-  --border-radius: 0;
-  
-  --button-border-color-highlight: #fff;
-  --card-border-color-highlight: rgba(255, 255, 255, 0.3);
+  --border-color: #333;
 }
 
-/* Force Dark Mode defaults */
 html.dark,
 .dark body,
 body {
   background-color: #000 !important;
   color: #fff !important;
-  font-family: var(--font-family) !important;
-}
-
-/* ALL Links and Buttons styled identically as grey text-links */
-a,
-.aex-shell button,
-.aex-shell .button {
-  color: #a0a0a0 !important;
-  text-decoration: underline !important;
-  text-underline-offset: 4px;
-  text-decoration-thickness: 1px;
-  background: transparent !important;
-  border: none !important;
-  padding: 0 !important;
-  transition: opacity 0.2s ease, color 0.2s ease !important;
-  font-family: var(--font-family) !important;
-  opacity: 1;
-}
-
-a:hover,
-.aex-shell button:hover,
-.aex-shell .button:hover {
-  color: #fff !important;
-  background: transparent !important;
-}
-
-/* Shrink standard Mint Pricing popover */
-#about-gas {
-  font-size: 0.8rem !important;
-}
-
-/* Borders for elements other than buttons: thin and less opacity */
-.collection-intro figure,
-.token-overview-card :is(.image, .embed),
-article.collection-overview-card .image {
-  border: 1px solid rgba(255, 255, 255, 0.15) !important;
-  border-radius: 0 !important;
-  background: #000 !important;
-}
-
-.frame.inset > *:not(.borderless) {
-  border: 0 !important;
-  border-top: 1px solid rgba(255, 255, 255, 0.15) !important;
-  padding: 2rem 1rem !important;
-  background: transparent !important;
-}
-
-.icon {
-  font-style: normal;
 }
