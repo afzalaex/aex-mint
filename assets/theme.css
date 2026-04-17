@@ -1,13 +1,73 @@
 :root {
-  --background: #000;
-  --color: #fff;
-  --primary: #fff;
-  --border-color: #333;
+  /* DARK MODE COLORS */
+  --background: #000000;
+  --color: #ffffff;
+  --muted: #888888;
+  --border-color: #333333;
+  --primary: #ffffff;
+
+  /* FONT */
+  --font-family: 'Space Mono', monospace;
+  --rem: 13.6px; /* 15% reduction from stock 16px (increased slightly for legibility) */
 }
 
-html.dark,
-.dark body,
 body {
-  background-color: #000 !important;
-  color: #fff !important;
+  background-color: var(--background);
+  color: var(--color);
+}
+
+/* Bold collection title */
+.collection-intro h1 {
+  font-weight: 700 !important;
+}
+
+/* Fix sticky hover on link buttons and force underlines */
+.button.link {
+  text-decoration: underline !important;
+  text-underline-offset: 4px;
+}
+
+/* Prevent focus state from acting like a sticky hover */
+.button.link:focus:not(:hover) {
+  color: var(--muted) !important;
+  background: transparent !important;
+}
+
+.button.link:hover {
+  color: var(--color) !important;
+  background: transparent !important;
+}
+
+/* Make author wallet links inside collection layout muted/grey to match standard link treatments */
+.collection-intro p a {
+  color: var(--muted) !important;
+  text-decoration: underline !important;
+  text-underline-offset: 4px;
+  transition: color 0.2s ease !important;
+}
+
+.collection-intro p a:hover {
+  color: var(--color) !important;
+}
+
+/* 100% Opacity stroke for Connect / Primary action buttons + Hover Fill */
+.button:not(.link) {
+  border: 1px solid #ffffff !important;
+  background-color: transparent !important;
+  color: #ffffff !important;
+  transition: background-color 0.2s ease, color 0.2s ease !important;
+}
+
+.button:not(.link):hover {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+
+/* Widen the Mint Pricing dialog to prevent brutalist table wraps and reduce vertical height */
+#about-gas {
+  --dialog-width: 650px;
+}
+
+#about-gas table td {
+  white-space: nowrap;
 }
