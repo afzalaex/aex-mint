@@ -51,16 +51,32 @@ body {
 }
 
 /* 100% Opacity stroke for Connect / Primary action buttons + Hover Fill */
-.button:not(.link) {
+/* Excludes the dialog close button (.close class from DialogFrame) */
+.button:not(.link):not(.close) {
   border: 1px solid #ffffff !important;
   background-color: transparent !important;
   color: #ffffff !important;
   transition: background-color 0.2s ease, color 0.2s ease !important;
 }
 
-.button:not(.link):hover {
+.button:not(.link):not(.close):hover {
   background-color: #ffffff !important;
   color: #000000 !important;
+}
+
+/* Close/X button inside dialogs — no border, no fill effect */
+dialog .close.button,
+dialog .button.close {
+  border: none !important;
+  background: transparent !important;
+  color: #ffffff !important;
+  transition: opacity 0.2s ease !important;
+}
+
+dialog .close.button:hover,
+dialog .button.close:hover {
+  background: transparent !important;
+  opacity: 0.6 !important;
 }
 
 /* Widen the Mint Pricing dialog to prevent brutalist table wraps and reduce vertical height */
