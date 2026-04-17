@@ -1,80 +1,65 @@
-# AEX Mint App
+# Aex Designs - Digital Artifacts
 
-Custom Mint app for the `e/very days 2026` contract on Ethereum.
+A minimalist frontend for the [Mint Protocol](https://docs.mint.vv.xyz/), configured as a persistent gallery and minting terminal for digital artifacts. 
 
-The app is a Nuxt 3 application that extends `@visualizevalue/mint-app-base` and is configured for:
+This application extends the `@visualizevalue/mint-app-base` layer to provide a streamlined experience for creators and collectors, mirroring the "Human Right to Mint" philosophy.
 
-- creator: `0x237047f8b97ab581974acaec36e6abba793a29b1`
-- collection: `0x0f3f91d3dee2d6172a3c496b392ebeaa26318842`
-- target subdomain: `mint.aex.design`
+## Principles
 
-## Stack
+- **Sovereign Creation**: Direct interaction with the Mint factory and indexer.
+- **Minimal Brutalism**: A high-contrast, performance-focused interface designed to prioritize the artifact over the interface.
+- **Permissionless**: No proprietary backends; all data is derived from the EVM and decentralized indexers.
 
-- Nuxt 3
-- `@visualizevalue/mint-app-base`
-- Mainnet Mint factory
-- Mint indexer: `https://indexer.networked.art`
+## Tech Stack
 
-## Local Development
+- **Framework**: Nuxt 3 (Vue.js)
+- **Base Layer**: `@visualizevalue/mint-app-base`
+- **Protocol**: Mint (EVM)
+- **Styling**: Vanilla CSS (Minimal Brutalist)
 
-Install dependencies:
+## Setup
+
+### 1. Install Dependencies
+
+Ensure you have `pnpm` installed:
 
 ```bash
 pnpm install
 ```
 
-Start the app:
+### 2. Configuration
+
+Copy the example environment file and adjust for your local configuration:
+
+```bash
+cp .env.example .env
+```
+
+Key configuration variables (available in `nuxt.config.ts` or `.env`):
+
+- `NUXT_PUBLIC_TITLE`: The branding displayed in the navigation.
+- `NUXT_PUBLIC_CREATOR_ADDRESS`: The Ethereum address of the creator.
+- `NUXT_PUBLIC_COLLECTION_ADDRESS`: The default collection address to display.
+
+### 3. Development
+
+Run the development server with Hot Module Replacement (HMR):
 
 ```bash
 pnpm dev
 ```
 
-## Build Commands
+The app will be available at `http://localhost:3000`.
 
-Build for production:
+## Deployment
 
-```bash
-pnpm build
-```
+This application is designed to be deployed on **Vercel** or any Node.js-compatible host. 
 
-Generate a static build:
+For Vercel:
+1. Connect this repository to your Vercel account.
+2. Set the `NITRO_PRESET=vercel` environment variable.
+3. Deploy.
 
-```bash
-pnpm generate
-```
+---
 
-Preview locally:
-
-```bash
-pnpm preview
-```
-
-## Optional Environment Variables
-
-See [`.env.example`](./.env.example).
-
-You only need extra env vars if you want to:
-
-- change RPC endpoints
-- add WalletConnect
-- override the deploy preset
-
-## Vercel Deployment
-
-This project is set up to deploy cleanly as a separate Vercel project for `mint.aex.design`.
-
-Suggested flow:
-
-```bash
-vercel link --project <project-name>
-vercel --prod
-```
-
-Then attach the custom domain in Vercel:
-
-```bash
-vercel domains add mint.aex.design <project-name>
-vercel domains inspect mint.aex.design
-```
-
-If `aex.design` DNS is managed outside Vercel, add the CNAME target shown by the second command at your DNS provider.
+Released under the MIT License. Built on the [Mint Protocol](https://docs.mint.vv.xyz/).

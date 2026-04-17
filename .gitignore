@@ -5,10 +5,13 @@ nuxt.d.ts
 .output
 .data
 .env
+.env.*
+!.env.example
 package-lock.json
 framework
 dist
 .DS_Store
+Thumbs.db
 
 # Yarn
 .yarn/cache
