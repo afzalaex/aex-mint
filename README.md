@@ -1,14 +1,16 @@
 # Aex Designs — Mint App
 
-A custom deployment of the [Mint protocol](https://docs.mint.vv.xyz) by [@afzalaex](https://x.com/afzalaex), showcasing the **e/very days 2026** collection — a 3rd year of daily art practice. Built on top of [`@visualizevalue/mint-app-base`](https://docs.mint.vv.xyz/guide/app/).
+A custom deployment of the [Mint protocol](https://docs.mint.vv.xyz) by [Aex Designs](https://aex.design), built on top of [`@visualizevalue/mint-app-base`](https://docs.mint.vv.xyz/guide/app/).
 
 🌐 [aex.design](https://aex.design) · 𝕏 [x.com/afzalaex](https://x.com/afzalaex) · Live: [mint.aex.design](https://mint.aex.design)
 
 ---
 
-## About This App
+## About
 
-This is a [Mint Base App](https://docs.mint.vv.xyz/guide/app/) — a Nuxt 3 application that extends the `@visualizevalue/mint-app-base` layer. The Mint protocol enables artists to deploy gasless, on-chain digital artifact collections on Ethereum. Pricing is based on live network fees, with 50% going to the artist as compensation.
+This app serves as the minting interface for all collections by Aex Designs on the Ethereum network. It is powered by the [Mint protocol](https://docs.mint.vv.xyz) — an open internet protocol for creating and collecting on-chain digital artifacts.
+
+Mint prices each artifact based on real-time Ethereum network fees, with 50% of the fee going directly to the artist. There are no artificial scarcity limits — scarcity is enforced through the moment of creation.
 
 > "To mint is a human right, and your right is your responsibility." — Mint Protocol
 
@@ -16,32 +18,31 @@ This is a [Mint Base App](https://docs.mint.vv.xyz/guide/app/) — a Nuxt 3 appl
 
 ## Customizations
 
-This app extends the stock Mint base app with the following changes:
+This app extends the stock `@visualizevalue/mint-app-base` using the [Nuxt layer extension pattern](https://docs.mint.vv.xyz/guide/app/extend). Only the files listed below are overridden — everything else (pages, routing, composables, wallet logic) is inherited from the base layer.
 
 ### Theme (`assets/theme.css`)
-- **Black background** (`#000000`) and **white text** (`#ffffff`) dark mode via CSS variable overrides
-- **Space Mono** monospace font (Google Fonts), scaled to 85% of default (`--rem: 13.6px`) to optically balance the wider letterform against the stock layout
-- **Muted grey** (`#888888`) for secondary text, author wallet links, and link button states
-- **Bold collection title** — the `h1` in the collection intro has `font-weight: 700`
-- **Primary buttons** (Connect, Mint) styled with a 100% opacity white `1px` border stroke, transparent background, and a fill-invert effect on hover
-- **Link buttons** (Expand/Collapse) retain the stock grey underlined text style with corrected hover and focus state
-- **Mint Pricing popover** widened to `650px` with `white-space: nowrap` on table cells to prevent wrapping and reduce vertical height
+- Pure black (`#000000`) background and white (`#ffffff`) text via CSS variable overrides
+- [Space Mono](https://fonts.google.com/specimen/Space+Mono) monospace font, scaled to 85% of the base `--rem` (13.6px) to optically balance the wider letterform against the stock layout proportions
+- Muted grey (`#888888`) for all secondary text, author wallet links, and inactive link states
+- Bold `font-weight: 700` on collection title `h1`
+- Primary action buttons (Connect, Mint) use a solid white `1px` stroke with a fill-invert hover effect
+- Link-style buttons (Expand/Collapse) retain stock underlined grey text with corrected focus/hover state
+- Gas pricing popover widened to `650px` with `white-space: nowrap` on table cells to prevent wrapping
 
 ### Navigation (`components/AppHeader.vue`)
-- Overrides the base `AppHeader.vue` to hardcode **"Aex Designs"** as the root breadcrumb label, replacing the default `NUXT_PUBLIC_TITLE` binding which was resolving incorrectly
-- All other header logic (gas indicator, connect button, address breadcrumbs) remains 100% stock
+- Overrides only the root breadcrumb label to display a hardcoded brand name instead of the default `NUXT_PUBLIC_TITLE` config binding
+- All other header behaviour (gas indicator, wallet connect, address breadcrumbs, layout) is 100% stock
 
 ### Icons (`components/Icon.vue`)
-- Overrides the base `Icon.vue` to strip colorful OS emojis from all UI elements
-- Retains only functional close icons: `✕` for `close` and `times`
-- `twitter` maps to the `𝕏` double-struck character
-- `website` renders as an inline white SVG wireframe globe (bypasses colorful OS emoji rendering)
-- All other icons return empty strings (hidden)
+- Overrides the base icon set to remove colorful OS emojis from all UI elements
+- Only functional icons are retained: `✕` for close/dismiss actions
+- `twitter` type maps to `𝕏`, `website` type renders as an inline white SVG wireframe globe
+- All other icon slots return empty (hidden)
 
-### Profile (`components/Profile/Header.client.vue`)
-- Overrides the base profile header to hardcode social links for the artist
-- Renders two primary action buttons: **🌐 Aex.Design** and **𝕏 x.com/afzalaex**
-- Falls back to ENS name or short wallet address for display name, consistent with stock
+### Artist Profile (`components/Profile/Header.client.vue`)
+- Overrides the base profile header to inject hardcoded social action links
+- Renders two primary buttons on the artist profile page: website and social links
+- Display name, avatar, and address copy logic remain stock
 
 ---
 
@@ -52,82 +53,69 @@ This app extends the stock Mint base app with the following changes:
 | Framework | [Nuxt 3](https://nuxt.com) |
 | Base Layer | [`@visualizevalue/mint-app-base`](https://docs.mint.vv.xyz/guide/app/) |
 | Blockchain | Ethereum Mainnet |
-| Wallet | WalletConnect via [wagmi](https://wagmi.sh) |
+| Wallet | WalletConnect + injected wallets via [wagmi](https://wagmi.sh) |
 | Font | [Space Mono](https://fonts.google.com/specimen/Space+Mono) |
 | Deployment | [Vercel](https://vercel.com) |
 
 ---
 
-## Environment Variables
+## Configuration
 
-Configuration follows the [Mint configuration spec](https://docs.mint.vv.xyz/guide/app/configuration). Set these in a `.env` file:
+Configuration follows the [Mint spec](https://docs.mint.vv.xyz/guide/app/configuration). Set these in a `.env` file at the project root:
 
 ```env
-# Required: Your WalletConnect project ID
-# Get one at https://cloud.walletconnect.com
+# Your WalletConnect project ID — get one at https://cloud.walletconnect.com
 NUXT_PUBLIC_WALLET_CONNECT_PROJECT_ID=your_project_id_here
 
-# Optional: Override Nitro preset for non-Vercel deployments
+# Optional: override the Nitro server preset for non-Vercel deployments
 NITRO_PRESET=node-server
 ```
 
-> The app falls back to a public WalletConnect project ID if none is set, but you should use your own for production.
-
-All other configuration (creator address, collection address, RPC endpoints, indexer) is hardcoded in `nuxt.config.ts` since this is a single-artist deployment.
+All other settings (creator address, collection address, RPC endpoints, indexer URL) are configured directly in `nuxt.config.ts` as this is a single-artist scoped deployment.
 
 ---
 
 ## Local Development
 
-Requires Node >= 20.19.0 and `npm`.
+**Requires Node >= 20.19.0**
 
 ```bash
 # Install dependencies
 npm install
 
-# Start local dev server
+# Start local dev server at http://localhost:3000
 npm run dev
 ```
 
-Then open [http://localhost:3000](http://localhost:3000).
-
 ---
 
-## How Extending the Base App Works
+## How the Extend Pattern Works
 
-This app uses the [Extend Base App](https://docs.mint.vv.xyz/guide/app/extend) pattern from the Mint docs. The `nuxt.config.ts` lists the base package in the `extends` array:
+Nuxt layer resolution means any local file at the same path as a base layer file automatically takes priority. For example:
 
-```ts
-extends: ['@visualizevalue/mint-app-base']
+```
+components/AppHeader.vue        ← overrides @visualizevalue/mint-app-base/components/AppHeader.vue
+components/Icon.vue             ← overrides base icons
+components/Profile/Header.client.vue  ← overrides base profile header
+assets/theme.css                ← loaded after base styles, overrides via CSS variables
 ```
 
-Any file in this repo at the same path as a base app file will automatically take priority (Nuxt layer resolution). This is how `AppHeader.vue`, `Icon.vue`, and `Profile/Header.client.vue` override their base counterparts without forking the entire codebase.
-
-All pages, composables, layouts, and API routes from the base app are inherited automatically.
+No forking of the base package is required. All pages, middleware, composables, and server logic are inherited automatically. See [Extend Base App](https://docs.mint.vv.xyz/guide/app/extend) in the Mint docs.
 
 ---
 
-## Deployment
+## Deploying Your Own Fork
 
-This app is deployed on [Vercel](https://vercel.com). The `NITRO_PRESET` is automatically set to `vercel` when the `VERCEL` environment variable is detected.
+To deploy this as your own Mint app:
 
-To deploy your own fork:
-1. Fork this repo
-2. Connect it to Vercel
-3. Set `NUXT_PUBLIC_WALLET_CONNECT_PROJECT_ID` in Vercel environment variables
-4. Update `nuxt.config.ts` with your own `creatorAddress` and `collectionAddress`
-
----
-
-## Collection
-
-| | |
-|---|---|
-| **Artist** | Afzal (`afzalaex.eth`) |
-| **Creator Address** | `0x237047f8b97ab581974acaec36e6abba793a29b1` |
-| **Collection Address** | `0x0f3f91d3dee2d6172a3c496b392ebeaa26318842` |
-| **Indexer** | `https://indexer.networked.art` |
-| **Platform** | [aex.design/every-days](https://aex.design/every-days) |
+1. Fork this repository
+2. Update `nuxt.config.ts`:
+   - `creatorAddress` — your Ethereum wallet address
+   - `collectionAddress` — your collection contract address
+   - `title`, `description`, `platformUrl` — your branding
+3. Update `components/Profile/Header.client.vue` with your own social links
+4. Connect the repo to [Vercel](https://vercel.com)
+5. Set `NUXT_PUBLIC_WALLET_CONNECT_PROJECT_ID` in Vercel environment variables
 
 ---
 
