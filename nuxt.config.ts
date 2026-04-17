@@ -39,7 +39,7 @@ export default defineNuxtConfig({
       meta: [
         {
           name: 'theme-color',
-          content: '#f1eadf',
+          content: '#000000',
         },
       ],
       link: [
