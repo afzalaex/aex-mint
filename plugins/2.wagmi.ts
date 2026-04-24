@@ -27,6 +27,7 @@ export default defineNuxtPlugin((nuxtApp) => {
 
   const connectors: CreateConnectorFn[] = [
     injected(),
+    injected({ target: 'rainbow' }),
     coinbaseWallet({
       appName: title,
       appLogoUrl: iconUrl,
@@ -44,6 +45,16 @@ export default defineNuxtPlugin((nuxtApp) => {
     connectors.push(
       walletConnect({
         projectId: nuxtApp.$config.public.walletConnectProjectId,
+        showQrModal: true,
+        qrModalOptions: {
+          themeMode: 'dark',
+        },
+        metadata: {
+          name: title,
+          description,
+          url: appUrl,
+          icons: [iconUrl],
+        },
       }),
     )
 

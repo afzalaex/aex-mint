@@ -153,3 +153,8 @@ dialog .button.close:hover {
 .title h1 small {
   color: var(--color) !important;
 }
+
+/* Prevent wallet options from overlapping with the absolute positioned close button */
+.wallet-options {
+  margin-top: 2rem;
+}
