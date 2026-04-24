@@ -1,7 +1,14 @@
-import { fileURLToPath } from 'node:url'
-import { dirname, join } from 'node:path'
-
-const currentDir = dirname(fileURLToPath(import.meta.url))
+const title = process.env.NUXT_PUBLIC_TITLE || 'Aex Designs'
+const description = process.env.NUXT_PUBLIC_DESCRIPTION || '3rd year of daily art practice by Afzal, learn more: aex.design/every-days'
+const creatorAddress = process.env.NUXT_PUBLIC_CREATOR_ADDRESS || '0x237047f8b97ab581974acaec36e6abba793a29b1'
+const defaultAvatar = process.env.NUXT_PUBLIC_DEFAULT_AVATAR || '/icon.svg'
+const platformUrl = process.env.NUXT_PUBLIC_PLATFORM_URL || 'https://aex.design/every-days'
+const indexerEndpoints = process.env.NUXT_PUBLIC_INDEXER_ENDPOINTS || 'https://indexer.networked.art'
+const mainnetRpc1 = process.env.NUXT_PUBLIC_MAINNET_RPC1 || 'https://eth.llamarpc.com'
+const rpc1 = process.env.NUXT_PUBLIC_RPC1 || 'https://eth.llamarpc.com'
+const rpc2 = process.env.NUXT_PUBLIC_RPC2 || 'https://ethereum-rpc.publicnode.com'
+const rpc3 = process.env.NUXT_PUBLIC_RPC3 || 'https://eth.drpc.org'
+const walletConnectProjectId = process.env.NUXT_PUBLIC_WALLET_CONNECT_PROJECT_ID || ''
 
 export default defineNuxtConfig({
   extends: [
@@ -19,40 +26,43 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      title: 'Aex Designs',
-      description: '3rd year of daily art practice by Afzal, learn more: aex.design/every-days',
-      creatorAddress: '0x237047f8b97ab581974acaec36e6abba793a29b1',
-      collectionAddress: '0x0f3f91d3dee2d6172a3c496b392ebeaa26318842',
-      defaultAvatar: '/icon.svg',
-      platformUrl: 'https://aex.design/every-days',
-      indexerEndpoints: 'https://indexer.networked.art',
+      title,
+      description,
+      creatorAddress,
+      defaultAvatar,
+      platformUrl,
+      indexerEndpoints,
       links: [
         {
           label: 'Aex.Design',
           url: 'https://aex.design',
-          icon: 'website'
+          icon: 'website',
         },
         {
           label: 'x.com/afzalaex',
           url: 'https://x.com/afzalaex',
-          icon: 'twitter'
-        }
+          icon: 'twitter',
+        },
       ],
-      walletConnectProjectId: process.env.NUXT_PUBLIC_WALLET_CONNECT_PROJECT_ID || 'bc436338b71debaeb1dfbb0dd5daddcf',
-      mainnetRpc1: 'https://eth.llamarpc.com',
-      rpc1: 'https://eth.llamarpc.com',
-      rpc2: 'https://ethereum-rpc.publicnode.com',
-      rpc3: 'https://eth.drpc.org',
+      walletConnectProjectId,
+      mainnetRpc1,
+      rpc1,
+      rpc2,
+      rpc3,
     },
   },
 
   app: {
     head: {
-      title: 'Aex Designs',
+      title,
       htmlAttrs: {
         class: 'dark',
       },
       meta: [
+        {
+          name: 'description',
+          content: description,
+        },
         {
           name: 'theme-color',
           content: '#000000',
@@ -74,6 +84,14 @@ export default defineNuxtConfig({
 
   nitro: {
     preset: process.env.NITRO_PRESET || (process.env.VERCEL ? 'vercel' : 'node-server'),
+  },
+
+  hooks: {
+    'app:resolve': (app) => {
+      app.plugins = app.plugins.filter(
+        plugin => !String(plugin.src).includes('@visualizevalue/mint-app-base/plugins/2.wagmi'),
+      )
+    },
   },
 
   devtools: {
