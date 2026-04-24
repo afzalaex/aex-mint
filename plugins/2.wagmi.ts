@@ -44,13 +44,6 @@ export default defineNuxtPlugin((nuxtApp) => {
     connectors.push(
       walletConnect({
         projectId: nuxtApp.$config.public.walletConnectProjectId,
-        showQrModal: true,
-        metadata: {
-          name: title,
-          description,
-          url: appUrl,
-          icons: [iconUrl],
-        },
       }),
     )
 
