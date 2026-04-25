@@ -17,12 +17,10 @@ export default defineNuxtPlugin((nuxtApp) => {
   const title = nuxtApp.$config.public.title || 'Mint'
   const description = nuxtApp.$config.public.description || 'Mint app'
   const mainChainId = nuxtApp.$config.public.chainId
-  const configuredDomain = nuxtApp.$config.public.domain as string | undefined
+  const configuredDomain = (nuxtApp.$config.public.domain as string | undefined) || 'mint.aex.design'
   const appUrl = import.meta.client
     ? window.location.origin
-    : configuredDomain
-      ? `https://${configuredDomain}`
-      : 'http://localhost:3000'
+    : `https://${configuredDomain}`
   const iconUrl = new URL(`${nuxtApp.$config.app.baseURL}icon.svg`, `${appUrl}/`).toString()
 
   const connectors: CreateConnectorFn[] = [

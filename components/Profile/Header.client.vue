@@ -14,7 +14,7 @@
       <Actions v-if="isArtist">
         <Button to="https://aex.design" target="_blank">
           <Icon type="website" />
-          <span>Aex.Design</span>
+          <span>aex.design</span>
         </Button>
         <Button to="https://x.com/afzalaex" target="_blank">
           <Icon type="twitter" />

@@ -36,7 +36,7 @@ export default defineNuxtConfig({
       domain,
       links: [
         {
-          label: 'Aex.Design',
+          label: 'aex.design',
           url: 'https://aex.design',
           icon: 'website',
         },
