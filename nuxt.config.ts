@@ -9,7 +9,7 @@ const mainnetRpc1 = process.env.NUXT_PUBLIC_MAINNET_RPC1 || 'https://eth.llamarp
 const rpc1 = process.env.NUXT_PUBLIC_RPC1 || 'https://eth.llamarpc.com'
 const rpc2 = process.env.NUXT_PUBLIC_RPC2 || 'https://ethereum-rpc.publicnode.com'
 const rpc3 = process.env.NUXT_PUBLIC_RPC3 || 'https://eth.drpc.org'
-const walletConnectProjectId = process.env.NUXT_PUBLIC_WALLET_CONNECT_PROJECT_ID || 'bc436338b71debaeb1dfbb0dd5daddcf'
+const walletConnectProjectId = process.env.NUXT_PUBLIC_WALLET_CONNECT_PROJECT_ID || '0559d9a7757dd065c823c785f0c650f2'
 
 export default defineNuxtConfig({
   extends: [
