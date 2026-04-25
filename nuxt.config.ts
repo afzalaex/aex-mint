@@ -4,6 +4,7 @@ const creatorAddress = process.env.NUXT_PUBLIC_CREATOR_ADDRESS || '0x237047f8b97
 const defaultAvatar = process.env.NUXT_PUBLIC_DEFAULT_AVATAR || '/icon.svg'
 const platformUrl = process.env.NUXT_PUBLIC_PLATFORM_URL || 'https://aex.design/every-days'
 const indexerEndpoints = process.env.NUXT_PUBLIC_INDEXER_ENDPOINTS || 'https://indexer.networked.art'
+const domain = process.env.NUXT_PUBLIC_DOMAIN || 'mint.aex.design'
 const mainnetRpc1 = process.env.NUXT_PUBLIC_MAINNET_RPC1 || 'https://eth.llamarpc.com'
 const rpc1 = process.env.NUXT_PUBLIC_RPC1 || 'https://eth.llamarpc.com'
 const rpc2 = process.env.NUXT_PUBLIC_RPC2 || 'https://ethereum-rpc.publicnode.com'
@@ -32,6 +33,7 @@ export default defineNuxtConfig({
       defaultAvatar,
       platformUrl,
       indexerEndpoints,
+      domain,
       links: [
         {
           label: 'Aex.Design',

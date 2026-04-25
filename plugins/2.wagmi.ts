@@ -17,7 +17,7 @@ export default defineNuxtPlugin((nuxtApp) => {
   const title = nuxtApp.$config.public.title || 'Mint'
   const description = nuxtApp.$config.public.description || 'Mint app'
   const mainChainId = nuxtApp.$config.public.chainId
-  const configuredDomain = process.env.NUXT_PUBLIC_DOMAIN
+  const configuredDomain = nuxtApp.$config.public.domain as string | undefined
   const appUrl = import.meta.client
     ? window.location.origin
     : configuredDomain
