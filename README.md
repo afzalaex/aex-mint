@@ -53,8 +53,9 @@ The app works with the defaults in [`.env.example`](./.env.example), but these a
 - `NUXT_PUBLIC_INDEXER_ENDPOINTS`: the Mint indexer endpoint used for profile and mint data. Critical for fast loads.
 - `NUXT_PUBLIC_RPC1`, `NUXT_PUBLIC_RPC2`, `NUXT_PUBLIC_RPC3`: Ethereum RPC fallbacks **in order**. Put working endpoints first (publicnode → drpc → 1rpc). A dead primary RPC makes the whole app feel stuck.
 - `NUXT_PUBLIC_WALLET_CONNECT_PROJECT_ID`: optional, but required if you want the WalletConnect connector to appear.
-- `NUXT_SSR`: keep `false` for this artist-scoped app (Mint's recommended SPA mode).
-- `NITRO_PRESET`: `static` for CDN hosting on Vercel; use `vercel` only with SSR.
+- `NUXT_SSR`: keep `true` to match mint.networked.art (SSR first paint). `false` produces a blank SPA shell until multi-MB JS loads.
+- `NITRO_PRESET`: `vercel` for SSR on Vercel.
+- `NUXT_PUBLIC_IPFS_GATEWAY`: defaults to Mint's gateway `https://ipfs.vv.xyz/ipfs/`.
 
 ## WalletConnect Project ID
 
@@ -101,7 +102,7 @@ pnpm preview
 
 ## Vercel Deployment
 
-This repo deploys as a **static SPA** for `mint.aex.design` (Mint's recommended mode for artist-scoped apps).
+This repo deploys with **SSR** on Vercel for `mint.aex.design`, matching how `mint.networked.art` feels (shell + progressive data load).
 
 ```bash
 vercel link --project <project-name>
@@ -115,9 +116,10 @@ Set these production env vars in the Vercel project (same values as `.env.exampl
 - `NUXT_PUBLIC_RPC1=https://ethereum-rpc.publicnode.com`
 - `NUXT_PUBLIC_RPC2=https://eth.drpc.org`
 - `NUXT_PUBLIC_RPC3=https://1rpc.io/eth`
+- `NUXT_PUBLIC_IPFS_GATEWAY=https://ipfs.vv.xyz/ipfs/`
 - `NUXT_PUBLIC_WALLET_CONNECT_PROJECT_ID`
-- `NUXT_SSR=false`
-- `NITRO_PRESET=static`
+- `NUXT_SSR=true` (or remove the var — do **not** leave it as `false`)
+- `NITRO_PRESET=vercel` (not `static`)
 
 Then attach and verify the custom domain:
 
@@ -128,6 +130,8 @@ vercel domains inspect mint.aex.design
 
 If DNS is managed outside Vercel, create the DNS record Vercel asks for in the last command output.
 
-### Why loads used to hang
+### Common UX issues
 
-Production was configured with `https://eth.llamarpc.com` as the first RPC. That endpoint currently returns HTTP 521, so every wallet/gas/ENS call waited on a dead node before falling back. The working Mint host (`mint.networked.art`) uses publicnode/drpc first instead.
+1. **Dead primary RPC** (`eth.llamarpc.com`) — app hangs on wallet/gas/chain reads.
+2. **`NUXT_SSR=false` static SPA** — blank page until multi-MB JS boots; feels like a crash vs networked.art.
+3. **Profile override** — keep the base profile so collected items work like Mint Protocol.

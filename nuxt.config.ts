@@ -11,10 +11,11 @@ const rpc1 = process.env.NUXT_PUBLIC_RPC1 || 'https://ethereum-rpc.publicnode.co
 const rpc2 = process.env.NUXT_PUBLIC_RPC2 || 'https://eth.drpc.org'
 const rpc3 = process.env.NUXT_PUBLIC_RPC3 || 'https://1rpc.io/eth'
 const walletConnectProjectId = process.env.NUXT_PUBLIC_WALLET_CONNECT_PROJECT_ID || '0559d9a7757dd065c823c785f0c650f2'
+// Same private IPFS gateway the main Mint host uses (faster than public ipfs.io).
+const ipfsGateway = process.env.NUXT_PUBLIC_IPFS_GATEWAY || 'https://ipfs.vv.xyz/ipfs/'
 
-// Artist-scoped Mint apps are recommended as SPA (see docs.mint.vv.xyz extend guide).
-// Default off unless explicitly enabled — avoids Vercel serverless cold starts on every page view.
-const ssr = process.env.NUXT_SSR === 'true'
+// Match mint.networked.art: SSR for a real first paint. Pure SPA feels blank/crashy while multi-MB JS loads.
+const ssr = process.env.NUXT_SSR !== 'false'
 
 export default defineNuxtConfig({
   extends: [
@@ -41,6 +42,7 @@ export default defineNuxtConfig({
       platformUrl,
       indexerEndpoints,
       domain,
+      ipfsGateway,
       links: [
         {
           label: 'aex.design',
@@ -101,9 +103,8 @@ export default defineNuxtConfig({
   },
 
   nitro: {
-    // Static SPA is the recommended deploy path for artist-scoped Mint apps.
-    // Override with NITRO_PRESET=vercel (and NUXT_SSR=true) only if you need SSR.
-    preset: process.env.NITRO_PRESET || (process.env.VERCEL ? 'static' : 'node-server'),
+    // Server render like mint.networked.art (not blank static SPA shell).
+    preset: process.env.NITRO_PRESET || (process.env.VERCEL ? 'vercel' : 'node-server'),
   },
 
   hooks: {

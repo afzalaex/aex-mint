@@ -75,8 +75,8 @@ export default defineNuxtPlugin((nuxtApp) => {
     transportDefinitions.push(rpcTransport(nuxtApp.$config.public.rpc2 as string))
   if (nuxtApp.$config.public.rpc3)
     transportDefinitions.push(rpcTransport(nuxtApp.$config.public.rpc3 as string))
-  // Last-resort public mainnet endpoint from viem chain defaults
-  transportDefinitions.push(http(undefined, { timeout: RPC_TIMEOUT_MS, retryCount: RPC_RETRY_COUNT }))
+  // Last-resort: viem chain default public RPC
+  transportDefinitions.push(http())
 
   const transports = fallback(transportDefinitions, {
     rank: false,
