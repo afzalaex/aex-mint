@@ -1,5 +1,12 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "nuxtjs",
-  "buildCommand": "pnpm run build"
+  "buildCommand": "pnpm run generate",
+  "outputDirectory": ".output/public",
+  "rewrites": [
+    {
+      "source": "/((?!_nuxt|icon\\.svg|fonts|favicon\\.ico).*)",
+      "destination": "/index.html"
+    }
+  ]
 }

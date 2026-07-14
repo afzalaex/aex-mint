@@ -50,10 +50,11 @@ The app works with the defaults in [`.env.example`](./.env.example), but these a
 - `NUXT_PUBLIC_TITLE`: the user-facing site name. This repo defaults to `Aex Designs`.
 - `NUXT_PUBLIC_CREATOR_ADDRESS`: the artist wallet the app is scoped to.
 - `NUXT_PUBLIC_PLATFORM_URL`: where the "learn more" link should point.
-- `NUXT_PUBLIC_INDEXER_ENDPOINTS`: the Mint indexer endpoint used for profile and mint data.
-- `NUXT_PUBLIC_RPC1`, `NUXT_PUBLIC_RPC2`, `NUXT_PUBLIC_RPC3`: fallback RPC endpoints for Ethereum.
+- `NUXT_PUBLIC_INDEXER_ENDPOINTS`: the Mint indexer endpoint used for profile and mint data. Critical for fast loads.
+- `NUXT_PUBLIC_RPC1`, `NUXT_PUBLIC_RPC2`, `NUXT_PUBLIC_RPC3`: Ethereum RPC fallbacks **in order**. Put working endpoints first (publicnode → drpc → 1rpc). A dead primary RPC makes the whole app feel stuck.
 - `NUXT_PUBLIC_WALLET_CONNECT_PROJECT_ID`: optional, but required if you want the WalletConnect connector to appear.
-- `NITRO_PRESET`: deployment target preset, currently `vercel`.
+- `NUXT_SSR`: keep `false` for this artist-scoped app (Mint's recommended SPA mode).
+- `NITRO_PRESET`: `static` for CDN hosting on Vercel; use `vercel` only with SSR.
 
 ## WalletConnect Project ID
 
@@ -100,12 +101,23 @@ pnpm preview
 
 ## Vercel Deployment
 
-This repo is ready to deploy as a separate Vercel project for `mint.aex.design`.
+This repo deploys as a **static SPA** for `mint.aex.design` (Mint's recommended mode for artist-scoped apps).
 
 ```bash
 vercel link --project <project-name>
 vercel --prod
 ```
+
+Set these production env vars in the Vercel project (same values as `.env.example`):
+
+- `NUXT_PUBLIC_CREATOR_ADDRESS`
+- `NUXT_PUBLIC_INDEXER_ENDPOINTS=https://indexer.networked.art`
+- `NUXT_PUBLIC_RPC1=https://ethereum-rpc.publicnode.com`
+- `NUXT_PUBLIC_RPC2=https://eth.drpc.org`
+- `NUXT_PUBLIC_RPC3=https://1rpc.io/eth`
+- `NUXT_PUBLIC_WALLET_CONNECT_PROJECT_ID`
+- `NUXT_SSR=false`
+- `NITRO_PRESET=static`
 
 Then attach and verify the custom domain:
 
@@ -115,3 +127,7 @@ vercel domains inspect mint.aex.design
 ```
 
 If DNS is managed outside Vercel, create the DNS record Vercel asks for in the last command output.
+
+### Why loads used to hang
+
+Production was configured with `https://eth.llamarpc.com` as the first RPC. That endpoint currently returns HTTP 521, so every wallet/gas/ENS call waited on a dead node before falling back. The working Mint host (`mint.networked.art`) uses publicnode/drpc first instead.

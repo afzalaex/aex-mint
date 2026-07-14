@@ -12,7 +12,8 @@
     "build": "nuxt build",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "start": "nuxi preview"
   },
   "dependencies": {
     "@visualizevalue/mint-app-base": "^0.3.0"

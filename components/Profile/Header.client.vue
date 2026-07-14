@@ -48,7 +48,7 @@ const artist = computed(() => store.artist(props.address))
 const name = computed(() => props.name || artist.value?.ens || shortAddress(props.address))
 const artistAddress = computed(() => props.address)
 const { copy, copied } = useClipboard({ source: artistAddress })
-const description = computed(() => props.description || artist.value.description)
+const description = computed(() => props.description || artist.value?.description)
 </script>
 
 <style scoped>
