@@ -1,5 +1,13 @@
 const env = (key: string, fallback = '') => (process.env[key] ?? fallback).trim()
 
+// Nitro reads NITRO_PRESET from process.env directly — sanitize early.
+if (process.env.NITRO_PRESET) {
+  process.env.NITRO_PRESET = process.env.NITRO_PRESET.trim()
+}
+if (process.env.NUXT_SSR) {
+  process.env.NUXT_SSR = process.env.NUXT_SSR.trim()
+}
+
 const title = env('NUXT_PUBLIC_TITLE', 'Aex Designs')
 const description = env('NUXT_PUBLIC_DESCRIPTION', '3rd year of daily art practice by Afzal, learn more: aex.design/every-days')
 const creatorAddress = env('NUXT_PUBLIC_CREATOR_ADDRESS', '0x237047f8b97ab581974acaec36e6abba793a29b1')
@@ -105,8 +113,14 @@ export default defineNuxtConfig({
   },
 
   nitro: {
-    // Server render like mint.networked.art (not blank static SPA shell).
-    preset: env('NITRO_PRESET') || (process.env.VERCEL ? 'vercel' : 'node-server'),
+    // Prefer explicit clean preset. Do not rely on a polluted NITRO_PRESET env
+    // (Vercel CLI can store trailing newlines and break Nitro: "vercel\n").
+    // On Vercel, omit NITRO_PRESET and let the platform / this default apply.
+    preset: (() => {
+      const fromEnv = env('NITRO_PRESET')
+      if (fromEnv === 'vercel' || fromEnv === 'static' || fromEnv === 'node-server') return fromEnv
+      return process.env.VERCEL ? 'vercel' : 'node-server'
+    })(),
   },
 
   hooks: {
